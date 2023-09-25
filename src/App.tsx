@@ -34,6 +34,8 @@ function App() {
   };
 
   const toggleTodo = (id: string, completed: boolean) => {
+    console.log("Completed status:", completed);
+
     setTodos((currentTodos: Todo[]) => {
       return currentTodos.map((todo: Todo) => {
         if (todo.id === id) {
@@ -52,15 +54,9 @@ function App() {
 
   return (
     <div className="flex justify-center items-center w-full h-screen flex-col bg-gray-700">
-      <div className=" -translate-y-32 w-96">
-        <TodoForm addTodo={addTodo} />
-        <h1 className="text-white text-xl">Todo list</h1>
-        <TodoList
-          todos={todos}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-        />
-      </div>
+      <TodoForm addTodo={addTodo} />
+      {/* <h1 className="text-white text-xl">Todo list</h1> */}
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </div>
   );
 }

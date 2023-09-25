@@ -11,26 +11,43 @@ function ListItem({
   toggleTodo: (id: string, completed: boolean) => void;
   deleteTodo: (id: string) => void;
 }) {
+  //const [isCompleted, setIsCompleted] = useState(false);
+
+  // const toggleCompleted = () => {
+  //   setIsCompleted((prevIsCompleted) => {
+  //     const tempIsCompleted = !prevIsCompleted;
+  //     completed = tempIsCompleted;
+  //     return tempIsCompleted;
+  //   });
+  //   toggleTodo(id, completed);
+  // };
+
   return (
-    <div>
-      <li className="my-2 flex justify-between">
-        <label className="text-white">
-          <input
-            type="checkbox"
-            checked={completed}
-            onChange={(e) => toggleTodo(id, e.target.checked)}
-            className="mr-2"
-          />
-          {title}
-        </label>
+    <li
+      className={`my-2 mx-2 w-32 h-32 flex justify-center items-center rounded-md ${
+        completed ? "bg-gray-400" : "bg-blue-700"
+      } relative group`}
+    >
+      <div
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center
+        w-full h-full bg-black bg-opacity-50 rounded-md
+      invisible group-hover:visible"
+      >
         <button
-          className="text-blue-500 ml-2 border-blue-500 rounded-sm border px-1"
+          className="text-white w-8 h-8 text-3xl"
+          onClick={() => toggleTodo?.(id, !completed)}
+        >
+          O
+        </button>
+        <button
+          className="text-white w-8 h-8 text-3xl"
           onClick={() => deleteTodo(id)}
         >
-          Delete
+          X
         </button>
-      </li>
-    </div>
+      </div>
+      <h2 className="text-white text-center w-full">{title}</h2>
+    </li>
   );
 }
 
