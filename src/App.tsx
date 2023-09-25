@@ -54,8 +54,8 @@ function App() {
 
   return (
     <div className="flex justify-center items-center w-full h-screen flex-col bg-gray-700">
+      <h2 className="text-white text-4xl mb-6">Your todo.</h2>
       <TodoForm addTodo={addTodo} />
-      {/* <h1 className="text-white text-xl">Todo list</h1> */}
       <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </div>
   );

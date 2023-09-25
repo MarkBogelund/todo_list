@@ -11,20 +11,18 @@ export default function TodoList({
   deleteTodo: (id: string) => void;
 }) {
   return (
-    <div className="bg-slate-800 w-[51.5%] py-4 px-4 rounded-md fixed top-[35%] overflow-y-auto max-lg">
-      <ul className="flex flex-row flex-wrap">
-        {todos.length === 0 && <li className="text-white">No todos</li>}
-        {todos.map((todo: Todo) => {
-          return (
-            <ListItem
-              key={todo.id}
-              {...todo}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
-            />
-          );
-        })}
-      </ul>
-    </div>
+    <ul className="w-[50%] p-4 bg-slate-800 rounded-md h-[65%] bottom-[5%] grid gap-2 grid-cols-5 justify-items-center items-center">
+      {todos.length === 0 && <li className="text-white">No todos</li>}
+      {todos.map((todo: Todo) => {
+        return (
+          <ListItem
+            key={todo.id}
+            {...todo}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
+          />
+        );
+      })}
+    </ul>
   );
 }

@@ -11,20 +11,9 @@ function ListItem({
   toggleTodo: (id: string, completed: boolean) => void;
   deleteTodo: (id: string) => void;
 }) {
-  //const [isCompleted, setIsCompleted] = useState(false);
-
-  // const toggleCompleted = () => {
-  //   setIsCompleted((prevIsCompleted) => {
-  //     const tempIsCompleted = !prevIsCompleted;
-  //     completed = tempIsCompleted;
-  //     return tempIsCompleted;
-  //   });
-  //   toggleTodo(id, completed);
-  // };
-
   return (
     <li
-      className={`my-2 mx-2 w-32 h-32 flex justify-center items-center rounded-md ${
+      className={`w-[80%] h-[80%] flex justify-center items-center rounded-md ${
         completed ? "bg-gray-400" : "bg-blue-700"
       } relative group`}
     >
