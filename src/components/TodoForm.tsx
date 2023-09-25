@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 
 function TodoForm({ addTodo }: { addTodo: (title: string) => void }) {
   const [item, setItem] = useState<string>("");
@@ -15,8 +16,8 @@ function TodoForm({ addTodo }: { addTodo: (title: string) => void }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex w-[30%] h-10 mb-6">
-      <button className="h-full aspect-square mr-2 rounded-md bg-blue-500 text-white">
-        +
+      <button className="h-full aspect-square mr-2 rounded-md bg-[#96BBA2] text-white">
+        <AddIcon />
       </button>
       <input
         value={item}
@@ -24,7 +25,7 @@ function TodoForm({ addTodo }: { addTodo: (title: string) => void }) {
         type="text"
         id="item"
         placeholder="New item"
-        className="flex-1 h-full bg-blue-500 text-white rounded-md placeholder:text-white pl-2"
+        className="flex-1 h-full bg-[#96BBA2] text-white rounded-md placeholder:text-white pl-2 font-light"
       />
     </form>
   );

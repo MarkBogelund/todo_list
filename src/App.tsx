@@ -53,10 +53,16 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-screen flex-col bg-gray-700">
-      <h2 className="text-white text-4xl mb-6">Your todo.</h2>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+    <div className=" bg-[#919C8F] w-full h-screen">
+      <div className="flex justify-center items-center flex-col fixed w-full top-[10%]">
+        <h2 className="text-white text-4xl mb-6 font-light">Your todo.</h2>
+        <TodoForm addTodo={addTodo} />
+        <TodoList
+          todos={todos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+        />
+      </div>
     </div>
   );
 }

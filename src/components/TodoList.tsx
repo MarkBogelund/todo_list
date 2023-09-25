@@ -11,7 +11,7 @@ export default function TodoList({
   deleteTodo: (id: string) => void;
 }) {
   return (
-    <ul className="w-[50%] p-4 bg-slate-800 rounded-md h-[65%] bottom-[5%] grid gap-2 grid-cols-5 justify-items-center items-center">
+    <ul className="w-[50%] px-3 py-6 bg-[#466751] rounded-md grid gap-2 gap-y-8 grid-cols-5 justify-items-center items-center overflow-y-auto">
       {todos.length === 0 && <li className="text-white">No todos</li>}
       {todos.map((todo: Todo) => {
         return (

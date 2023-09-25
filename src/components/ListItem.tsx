@@ -1,3 +1,6 @@
+import ClearIcon from "@mui/icons-material/Clear";
+import DoneIcon from "@mui/icons-material/Done";
+
 function ListItem({
   completed,
   id,
@@ -13,9 +16,9 @@ function ListItem({
 }) {
   return (
     <li
-      className={`w-[80%] h-[80%] flex justify-center items-center rounded-md ${
-        completed ? "bg-gray-400" : "bg-blue-700"
-      } relative group`}
+      className={`w-[80%] aspect-square flex justify-center items-center rounded-md ${
+        completed ? "bg-[#3c6f69]" : "bg-[#96BBA2]"
+      } relative group font-light`}
     >
       <div
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center
@@ -23,16 +26,13 @@ function ListItem({
       invisible group-hover:visible"
       >
         <button
-          className="text-white w-8 h-8 text-3xl"
+          className="text-white w-8 h-8"
           onClick={() => toggleTodo?.(id, !completed)}
         >
-          O
+          <DoneIcon />
         </button>
-        <button
-          className="text-white w-8 h-8 text-3xl"
-          onClick={() => deleteTodo(id)}
-        >
-          X
+        <button className="text-white w-8 h-8" onClick={() => deleteTodo(id)}>
+          <ClearIcon />
         </button>
       </div>
       <h2 className="text-white text-center w-full">{title}</h2>
