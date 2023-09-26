@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div className=" bg-[#919C8F] w-full h-screen">
-      <div className="flex justify-center items-center flex-col fixed w-full top-[10%]">
+      <div className="flex justify-center items-center flex-col fixed w-full h-full">
         <h2 className="text-white text-4xl mb-6 font-light">Your todo.</h2>
         <TodoForm addTodo={addTodo} />
         <TodoList

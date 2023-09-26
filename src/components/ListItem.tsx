@@ -2,22 +2,24 @@ import ClearIcon from "@mui/icons-material/Clear";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+export interface ListItemProps {
+  completed: boolean;
+  id: string;
+  title: string;
+  toggleTodo: (id: string, completed: boolean) => void;
+  deleteTodo: (id: string) => void;
+}
+
 function ListItem({
   completed,
   id,
   title,
   toggleTodo,
   deleteTodo,
-}: {
-  completed: boolean;
-  id: string;
-  title: string;
-  toggleTodo: (id: string, completed: boolean) => void;
-  deleteTodo: (id: string) => void;
-}) {
+}: ListItemProps) {
   return (
     <li
-      className={`w-[80%] aspect-square flex justify-center items-center rounded-md ${
+      className={`w-[100%] aspect-square flex justify-center items-center rounded-md ${
         completed ? "bg-[#3c6f69]" : "bg-[#96BBA2]"
       } relative group font-light overflow-hidden`}
     >
