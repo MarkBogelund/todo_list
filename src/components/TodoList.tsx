@@ -13,7 +13,7 @@ export default function TodoList({
 }) {
   return (
     <div className="relative w-[50%] h-[65%] bg-[#466751] rounded-md p-3">
-      <ul className="w-[100%] h-full grid grid-cols-5 auto-rows-min overflow-y-auto justify-items-center gap-4 scrollbar-none">
+      <ul className="w-[100%] h-full grid grid-cols-5 auto-rows-min overflow-y-auto justify-items-center gap-6 scrollbar-none">
         {todos.length === 0 && (
           <li className="text-white mt-6 font-light">No todos</li>
         )}
