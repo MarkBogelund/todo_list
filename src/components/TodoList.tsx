@@ -1,6 +1,7 @@
 import ListItem from "./ListItem";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Todo } from "../App";
+import EditableCard from "./EditableCard";
 
 export default function TodoList({
   todos,
@@ -13,13 +14,12 @@ export default function TodoList({
 }) {
   const [openCard, setOpenCard] = useState(false);
 
-  const [cardTitle, setCardTitle] = useState("");
-
-  const [cardColor, setCardColor] = useState("");
-
-  const [cardCompleted, setCardCompleted] = useState(false);
-
-  const [cardId, setCardId] = useState("");
+  const [card, setCard] = useState({
+    title: "",
+    color: "",
+    completed: false,
+    id: "",
+  });
 
   const handleOpenCard = (
     completed: boolean,
@@ -28,10 +28,12 @@ export default function TodoList({
     color?: string
   ) => {
     setOpenCard(true);
-    setCardTitle(title);
-    setCardColor(color!);
-    setCardCompleted(completed);
-    setCardId(id);
+    setCard({
+      title: title,
+      color: color ? color : "undefined",
+      completed: completed,
+      id: id,
+    });
   };
 
   return (
@@ -69,7 +71,15 @@ export default function TodoList({
           }
         }}
       >
-        <div className="w-96 h-96 rounded-md bg-[#96BBA2] shadow-lg"></div>
+        <div className="w-96 h-96 rounded-md bg-[#96BBA2] shadow-lg flex flex-col items-center">
+          <EditableCard
+            title={card.title}
+            color={card.color}
+            completed={card.completed}
+            id={card.id}
+            toggleTodo={toggleTodo}
+          />
+        </div>
       </div>
     </>
   );
