@@ -9,12 +9,7 @@ export interface ListItemProps {
   color?: string;
   toggleTodo: (id: string, completed: boolean) => void;
   deleteTodo: (id: string) => void;
-  openCard: (
-    completed: boolean,
-    id: string,
-    title: string,
-    color?: string
-  ) => void;
+  showEditableCard: (id: string) => void;
 }
 
 function ListItem({
@@ -24,7 +19,7 @@ function ListItem({
   color,
   toggleTodo,
   deleteTodo,
-  openCard,
+  showEditableCard,
 }: ListItemProps) {
   const provideColor = () => {
     switch (color) {
@@ -39,16 +34,12 @@ function ListItem({
     }
   };
 
-  const handleCardClick = () => {
-    openCard(completed, id, title, color);
-  };
-
   return (
     <li
       className={`w-[100%] aspect-square flex justify-center items-center rounded-md ${
         completed ? "bg-[#3c6f69]" : "bg-[#96BBA2]"
       } relative group font-light overflow-hidden`}
-      onClick={handleCardClick}
+      onClick={() => showEditableCard(id)}
     >
       <div
         className="absolute w-[110%] h-[110%] bg-black flex items-center justify-center

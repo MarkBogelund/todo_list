@@ -19,6 +19,24 @@ function App() {
     }
   });
 
+  const [redFilter, setRedFilter] = useState<Todo[]>([]);
+
+  const [yellowFilter, setYellowFilter] = useState<Todo[]>([]);
+
+  const [blueFilter, setBlueFilter] = useState<Todo[]>([]);
+
+  const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    setRedFilter(todos.filter((todo: Todo) => todo.color === "red"));
+    setYellowFilter(todos.filter((todo: Todo) => todo.color === "yellow"));
+    setBlueFilter(todos.filter((todo: Todo) => todo.color === "blue"));
+  }, [todos]);
+
+  const handleFiltering = (color: string) => () => {
+    setFilter(color);
+  };
+
   useEffect(() => {
     localStorage.setItem("ITEMS", JSON.stringify(todos));
   }, [todos]);
@@ -29,7 +47,7 @@ function App() {
         id: crypto.randomUUID(),
         title: item!,
         completed: false,
-        color: "red",
+        color: "",
       };
       return [...currentTodos, newTodo];
     });
@@ -48,18 +66,63 @@ function App() {
     });
   };
 
-  const deleteTodo = (id: string) => {
+  const setTodoColor = (id: string, color: string) => {
     setTodos((currentTodos: Todo[]) => {
-      return currentTodos.filter((todo: Todo) => todo.id !== id);
+      return currentTodos.map((todo: Todo) => {
+        if (todo.id === id) {
+          return { ...todo, color };
+        }
+        return todo;
+      });
+    });
+
+    addToFilter(id, color);
+  };
+
+  const addToFilter = (id: string, color: string) => {
+    setRedFilter((currentTodos: Todo[]) => {
+      if (color === "red" && !currentTodos.some((todo) => todo.id === id)) {
+        return [...currentTodos, { id, color }] as Todo[];
+      } else if (color !== "red") {
+        return currentTodos.filter((todo) => todo.id !== id);
+      }
+      return currentTodos;
+    });
+
+    setYellowFilter((currentTodos: Todo[]) => {
+      if (color === "yellow" && !currentTodos.some((todo) => todo.id === id)) {
+        return [...currentTodos, { id, color }] as Todo[];
+      } else if (color !== "yellow") {
+        return currentTodos.filter((todo) => todo.id !== id);
+      }
+      return currentTodos;
+    });
+
+    setBlueFilter((currentTodos: Todo[]) => {
+      if (color === "blue" && !currentTodos.some((todo) => todo.id === id)) {
+        return [...currentTodos, { id, color }] as Todo[];
+      } else if (color !== "blue") {
+        return currentTodos.filter((todo) => todo.id !== id);
+      }
+      return currentTodos;
     });
   };
 
-  const handleFiltering = (color: string) => () => {
-    console.log("Color:", color);
-    setTodos((currentTodos: Todo[]) => {
-      console.log("Current todos:", currentTodos);
+  // Use useEffect to log updated state values
+  useEffect(() => {
+    console.log(
+      "Red filter:",
+      redFilter,
+      "Yellow filter:",
+      yellowFilter,
+      "Blue filter:",
+      blueFilter
+    );
+  }, [redFilter, yellowFilter, blueFilter]);
 
-      return currentTodos.filter((todo: Todo) => todo.color === color);
+  const deleteTodo = (id: string) => {
+    setTodos((currentTodos: Todo[]) => {
+      return currentTodos.filter((todo: Todo) => todo.id !== id);
     });
   };
 
@@ -78,14 +141,23 @@ function App() {
             className="w-4 h-4 rounded-[100%] bg-[#EFDE82]"
           ></button>
           <button
-            onClick={handleFiltering("green")}
+            onClick={handleFiltering("blue")}
             className="w-4 h-4 rounded-[100%] bg-[#75C9F8]"
+          ></button>
+          <button
+            onClick={handleFiltering("all")}
+            className="w-4 h-4 rounded-[100%] border-2 border-white"
           ></button>
         </div>
         <TodoList
           todos={todos}
+          redFilter={redFilter}
+          yellowFilter={yellowFilter}
+          blueFilter={blueFilter}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
+          setTodoColor={setTodoColor}
+          filter={filter}
         />
       </div>
     </div>
