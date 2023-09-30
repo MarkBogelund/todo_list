@@ -11,6 +11,17 @@ export type Todo = {
   subtext: string;
 };
 
+export const colors = {
+  red: "#E63A3A",
+  yellow: "#EFDE82",
+  blue: "#75C9F8",
+
+  cardNotDone: "#7daa8b",
+  cardDone: "#3c6f69",
+  listBackground: "#486150",
+  backround: "#657a70",
+};
+
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => {
     const localValue = localStorage.getItem("ITEMS");
@@ -138,7 +149,7 @@ function App() {
   };
 
   return (
-    <div className=" bg-[#919C8F] w-full h-screen">
+    <div className=" bg-[#657a70] w-full h-screen">
       <div className="flex justify-center items-center flex-col fixed w-full h-full">
         <h2 className="text-white text-4xl mb-6 font-light">Your todo.</h2>
         <TodoForm addTodo={addTodo} />

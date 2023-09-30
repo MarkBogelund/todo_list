@@ -53,7 +53,7 @@ function EditableCard({
   return (
     <div
       className={`w-96 h-96 rounded-md shadow-lg flex flex-col justify-center ${
-        completed ? "bg-[#3c6f69]" : "bg-[#96BBA2]"
+        completed ? "bg-[#3c6f69]" : "bg-[#7daa8b]"
       }`}
     >
       <EditableTitle

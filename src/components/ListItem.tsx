@@ -35,7 +35,7 @@ function ListItem({
   return (
     <li
       className={`w-[100%] aspect-square flex justify-center items-center rounded-md ${
-        completed ? "bg-[#3c6f69]" : "bg-[#96BBA2]"
+        completed ? "bg-[#3c6f69]" : "bg-[#7daa8b]"
       } relative group font-light overflow-hidden`}
       onClick={() => showEditableCard(id)}
     >
