@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import ColorFilter from "./ColorFilter";
+import EditableTitle from "./EditableTitle";
+import { Todo } from "../App";
 
 function EditableCard({
   todo,
   toggleTodo,
   setTodoColor,
+  setSubtext,
 }: {
-  todo: {
-    id: string;
-    title: string;
-    completed: boolean;
-    color: string;
-  };
+  todo: Todo;
   toggleTodo: (id: string, completed: boolean) => void;
   setTodoColor: (id: string, color: string) => void;
+  setSubtext: (id: string, subtext: string) => void;
 }) {
   const [completed, setCompleted] = useState(todo.completed);
 
@@ -25,41 +25,41 @@ function EditableCard({
     toggleTodo?.(todo.id, !completed);
   };
 
-  const handleColorChange = (color: string) => () => {
+  const handleColorChange = (color: string) => {
     todo.color = color;
     setTodoColor?.(todo.id, color);
   };
 
+  const handleSubTextChange = (subtext: string) => {
+    todo.subtext = subtext;
+    setSubtext?.(todo.id, subtext);
+  };
+
   return (
-    <>
-      <div className="flex items-center w-full ml-[20%] mt-[10%]">
+    <div className="w-96 h-96 rounded-md bg-[#96BBA2] shadow-lg flex flex-col justify-center">
+      <h1 className="ml-[10%] mb-4 mt-[20%] text-2xl text-white font-thin">
+        {todo.title}
+      </h1>
+      <div className="w-[80%] h-[1px] bg-white self-center"></div>
+      <EditableTitle
+        defaultTitle={todo.subtext}
+        onSave={(text) => handleSubTextChange(text)}
+        className="w-[80%] h-[50%] ml-[10%] mt-4"
+        textType="subtext"
+      />
+      <div className="w-full flex justify-between mt-auto mb-4">
         <input
-          className="w-6 h-6 text-black mr-3"
+          className="w-6 h-6 text-black mx-4"
           type="checkbox"
           onChange={handleCompleted}
           checked={completed}
         />
-
-        <h2>{todo.title}</h2>
-
-        <button
-          onClick={handleColorChange("red")}
-          className="w-4 h-4 rounded-[100%] bg-[#E63A3A] ml-2"
-        ></button>
-        <button
-          onClick={handleColorChange("yellow")}
-          className="w-4 h-4 rounded-[100%] bg-[#EFDE82] ml-2"
-        ></button>
-        <button
-          onClick={handleColorChange("blue")}
-          className="w-4 h-4 rounded-[100%] bg-[#75C9F8] ml-2"
-        ></button>
-        <button
-          onClick={handleColorChange("all")}
-          className="w-4 h-4 rounded-[100%] ml-2 border-2 border-white"
-        ></button>
+        <ColorFilter
+          handleColorClick={handleColorChange}
+          className="self-end mx-4"
+        />
       </div>
-    </>
+    </div>
   );
 }
 

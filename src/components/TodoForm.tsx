@@ -25,7 +25,7 @@ function TodoForm({ addTodo }: { addTodo: (title: string) => void }) {
         type="text"
         id="item"
         placeholder="New item"
-        className="flex-1 h-full bg-[#96BBA2] text-white rounded-md placeholder:text-white pl-2 font-light"
+        className="flex-1 h-full bg-[#96BBA2] text-white rounded-md placeholder:text-white pl-2 font-light outline-none"
       />
     </form>
   );

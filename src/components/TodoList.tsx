@@ -12,6 +12,7 @@ export default function TodoList({
   toggleTodo,
   deleteTodo,
   setTodoColor,
+  setSubtext,
 }: {
   todos: Todo[];
   filter: string;
@@ -21,13 +22,15 @@ export default function TodoList({
   toggleTodo: (id: string, completed: boolean) => void;
   deleteTodo: (id: string) => void;
   setTodoColor: (id: string, color: string) => void;
+  setSubtext: (id: string, subtext: string) => void;
 }) {
   const [openCard, setOpenCard] = useState(false);
-  const [card, setCard] = useState({
+  const [card, setCard] = useState<Todo>({
     id: "",
     title: "",
     completed: false,
     color: "",
+    subtext: "",
   });
 
   const handleOpenCard = (id: string) => {
@@ -94,13 +97,12 @@ export default function TodoList({
           }
         }}
       >
-        <div className="w-96 h-96 rounded-md bg-[#96BBA2] shadow-lg flex flex-col items-center">
-          <EditableCard
-            todo={card}
-            toggleTodo={toggleTodo}
-            setTodoColor={setTodoColor}
-          />
-        </div>
+        <EditableCard
+          todo={card}
+          toggleTodo={toggleTodo}
+          setTodoColor={setTodoColor}
+          setSubtext={setSubtext}
+        />
       </div>
     </>
   );

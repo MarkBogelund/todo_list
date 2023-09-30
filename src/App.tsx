@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import ColorFilter from "./components/ColorFilter";
 
 export type Todo = {
   id: string;
   title: string;
   completed: boolean;
   color: string;
+  subtext: string;
 };
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
     setBlueFilter(todos.filter((todo: Todo) => todo.color === "blue"));
   }, [todos]);
 
-  const handleFiltering = (color: string) => () => {
+  const handleFiltering = (color: string) => {
     setFilter(color);
   };
 
@@ -48,14 +50,13 @@ function App() {
         title: item!,
         completed: false,
         color: "",
+        subtext: "",
       };
       return [...currentTodos, newTodo];
     });
   };
 
   const toggleTodo = (id: string, completed: boolean) => {
-    console.log("Completed status:", completed);
-
     setTodos((currentTodos: Todo[]) => {
       return currentTodos.map((todo: Todo) => {
         if (todo.id === id) {
@@ -108,17 +109,28 @@ function App() {
     });
   };
 
+  const setSubtext = (id: string, newSubtext: string) => {
+    setTodos((currentTodos: Todo[]) => {
+      return currentTodos.map((todo: Todo) => {
+        if (todo.id === id) {
+          return { ...todo, subtext: newSubtext };
+        }
+        return todo;
+      });
+    });
+  };
+
   // Use useEffect to log updated state values
-  useEffect(() => {
-    console.log(
-      "Red filter:",
-      redFilter,
-      "Yellow filter:",
-      yellowFilter,
-      "Blue filter:",
-      blueFilter
-    );
-  }, [redFilter, yellowFilter, blueFilter]);
+  // useEffect(() => {
+  //   console.log(
+  //     "Red filter:",
+  //     redFilter,
+  //     "Yellow filter:",
+  //     yellowFilter,
+  //     "Blue filter:",
+  //     blueFilter
+  //   );
+  // }, [redFilter, yellowFilter, blueFilter]);
 
   const deleteTodo = (id: string) => {
     setTodos((currentTodos: Todo[]) => {
@@ -131,24 +143,10 @@ function App() {
       <div className="flex justify-center items-center flex-col fixed w-full h-full">
         <h2 className="text-white text-4xl mb-6 font-light">Your todo.</h2>
         <TodoForm addTodo={addTodo} />
-        <div className="flex gap-4 mb-6">
-          <button
-            onClick={handleFiltering("red")}
-            className="w-4 h-4 rounded-[100%] bg-[#E63A3A]"
-          ></button>
-          <button
-            onClick={handleFiltering("yellow")}
-            className="w-4 h-4 rounded-[100%] bg-[#EFDE82]"
-          ></button>
-          <button
-            onClick={handleFiltering("blue")}
-            className="w-4 h-4 rounded-[100%] bg-[#75C9F8]"
-          ></button>
-          <button
-            onClick={handleFiltering("all")}
-            className="w-4 h-4 rounded-[100%] border-2 border-white"
-          ></button>
-        </div>
+        <ColorFilter
+          handleColorClick={(color) => handleFiltering(color)}
+          className="mb-4"
+        />
         <TodoList
           todos={todos}
           redFilter={redFilter}
@@ -158,6 +156,7 @@ function App() {
           deleteTodo={deleteTodo}
           setTodoColor={setTodoColor}
           filter={filter}
+          setSubtext={setSubtext}
         />
       </div>
     </div>
