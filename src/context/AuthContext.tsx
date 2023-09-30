@@ -10,6 +10,7 @@ import {
   UserCredential,
   signInWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { User } from "firebase/auth";
@@ -19,6 +20,7 @@ interface AuthContextProps {
   register: (email: string, password: string) => Promise<UserCredential>;
   login: (email: string, password: string) => Promise<UserCredential>;
   logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
   user: User | null;
 }
 
@@ -54,7 +56,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return signOut(auth);
   };
 
-  const value: AuthContextProps = { register, login, logout, user };
+  const resetPassword = (email: string) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
+  const value: AuthContextProps = {
+    register,
+    login,
+    logout,
+    resetPassword,
+    user,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

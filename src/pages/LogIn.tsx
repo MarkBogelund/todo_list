@@ -2,37 +2,47 @@ import { colors } from "../App";
 import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { handlePrintErrors } from "../utils";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { login } = UserAuth();
+  const { login, resetPassword } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
 
     try {
       await login(email, password);
       navigate("/");
     } catch (e: any) {
-      setError(e.message);
-      console.log(":(", e.message);
+      console.log(e.code);
+      alert(handlePrintErrors(e.code));
+    }
+  };
 
-      // If user email is not found display error message
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Please enter your email in the email field first.");
+      return;
+    }
 
-      // If user password is incorrect display error message
+    try {
+      await resetPassword(email);
+      alert("Password reset email sent. Please check your inbox.");
+    } catch (e: any) {
+      console.log(e.code);
+      alert(handlePrintErrors(e.code));
     }
   };
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div
-        className={`w-[30%] h-[60%] bg-[${colors.listBackground}] rounded-md flex flex-col justify-start items-center`}
+        className={`w-[70%] sm:w-[45%] lg:w-[30%] h-[60%] bg-[${colors.listBackground}] rounded-md flex flex-col justify-center items-center`}
       >
-        <h1 className="text-white text-3xl font-thin mt-[22%]">Log in</h1>
+        <h1 className="text-white text-3xl font-thin mt-[-10%]">Log in</h1>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center justify-center w-full"
@@ -57,7 +67,11 @@ function Login() {
           >
             Log in
           </button>
-          <a className="text-white font-thin text-xs mt-4" href="#">
+          <a
+            onClick={handleForgotPassword}
+            className="text-white font-thin text-xs mt-4"
+            href="#"
+          >
             Forgot password?
           </a>
         </form>

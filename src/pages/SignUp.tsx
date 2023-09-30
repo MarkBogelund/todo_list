@@ -1,34 +1,31 @@
 import { useState } from "react";
 import { colors } from "../App";
-import { AuthProvider, UserAuth } from "../context/AuthContext";
+import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { handlePrintErrors } from "../utils";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const { register } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-
     try {
       await register(email, password);
       navigate("/");
     } catch (e: any) {
-      setError(e.message);
-      console.log(e.message);
+      alert(handlePrintErrors(e.code));
     }
   };
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div
-        className={`w-[30%] h-[60%] bg-[${colors.listBackground}] rounded-md flex flex-col justify-start items-center`}
+        className={`w-[70%] sm:w-[45%] lg:w-[30%] h-[60%] bg-[${colors.listBackground}] rounded-md flex flex-col justify-center items-center`}
       >
-        <h1 className="text-white text-3xl font-thin mt-[22%]">
+        <h1 className="text-white text-3xl font-thin mt-[-10%]">
           Create an account
         </h1>
         <form
