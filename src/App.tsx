@@ -120,6 +120,17 @@ function App() {
     });
   };
 
+  const setTitle = (id: string, newTitle: string) => {
+    setTodos((currentTodos: Todo[]) => {
+      return currentTodos.map((todo: Todo) => {
+        if (todo.id === id) {
+          return { ...todo, title: newTitle };
+        }
+        return todo;
+      });
+    });
+  };
+
   // Use useEffect to log updated state values
   // useEffect(() => {
   //   console.log(
@@ -157,6 +168,7 @@ function App() {
           setTodoColor={setTodoColor}
           filter={filter}
           setSubtext={setSubtext}
+          setTitle={setTitle}
         />
       </div>
     </div>

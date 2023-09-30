@@ -1,6 +1,4 @@
-import ClearIcon from "@mui/icons-material/Clear";
-import DoneIcon from "@mui/icons-material/Done";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Checkbox from "./Checkbox";
 
 export interface ListItemProps {
   completed: boolean;
@@ -45,24 +43,12 @@ function ListItem({
         className="absolute w-[110%] h-[110%] bg-black flex items-center justify-center
         invisible opacity-0 group-hover:visible group-hover:opacity-100 group-hover:bg-opacity-50 transition-opacity ease-in duration-100"
       >
-        <button
-          className="text-white w-8 h-8"
-          onClick={(event) => {
-            event.stopPropagation(); // Stop propagation here
-            toggleTodo?.(id, !completed);
-          }}
-        >
-          {completed ? <ClearIcon /> : <DoneIcon />}
-        </button>
-        <button
-          className="text-white w-8 h-8"
-          onClick={(event) => {
-            event.stopPropagation(); // Stop propagation here
-            deleteTodo(id);
-          }}
-        >
-          <DeleteIcon />
-        </button>
+        <Checkbox
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+          id={id}
+          completed={completed}
+        />
       </div>
       <h2 className="text-white text-center w-full">{title}</h2>
       <div

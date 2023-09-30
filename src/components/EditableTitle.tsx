@@ -3,14 +3,16 @@ import React, { useState, useRef, useEffect } from "react";
 interface EditableTitleProps {
   defaultTitle: string;
   onSave?: (newTitle: string) => void;
-  className?: string;
+  positionStyle?: string;
+  titleStyle?: string;
   textType?: string;
 }
 
 const EditableTitle: React.FC<EditableTitleProps> = ({
   defaultTitle,
   onSave,
-  className,
+  positionStyle,
+  titleStyle,
   textType,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -52,11 +54,11 @@ const EditableTitle: React.FC<EditableTitleProps> = ({
   };
 
   return (
-    <div className={`${className} flex items-start`}>
+    <div className={`${positionStyle} flex items-start`}>
       {!isEditing ? (
         title ? (
           <h1
-            className="cursor-pointer text-white font-thin px-2 py-1 w-full h-full"
+            className={`${titleStyle} cursor-pointer text-white font-thin px-2 py-1 w-full h-full`}
             onClick={() => setIsEditing(true)}
           >
             {title}
@@ -72,7 +74,7 @@ const EditableTitle: React.FC<EditableTitleProps> = ({
       ) : (
         <textarea
           ref={inputRef as React.RefObject<HTMLTextAreaElement>}
-          className="w-full h-full border-white border rounded-md px-2 py-1 outline-none text-gray-900 font-thin resize-none overflow-hidden overflow-y-hidden"
+          className={`${titleStyle} w-full h-full border-white border rounded-md px-2 py-1 outline-none text-gray-900 font-thin resize-none overflow-hidden bg-transparent box-border`}
           placeholder={`${textType}...`}
           value={title}
           onChange={handleInputChange}
