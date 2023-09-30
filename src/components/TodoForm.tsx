@@ -15,7 +15,10 @@ function TodoForm({ addTodo }: { addTodo: (title: string) => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-[30%] h-10 mb-6">
+    <form
+      onSubmit={handleSubmit}
+      className="flex justify-center w-[30%] h-10 mb-6"
+    >
       <button className="h-full aspect-square mr-2 rounded-md bg-[#7daa8b] text-white">
         <AddIcon />
       </button>
