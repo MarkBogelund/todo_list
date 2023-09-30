@@ -1,8 +1,10 @@
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 export type Todo = {
   id: string;
@@ -26,12 +28,21 @@ export const colors = {
 function App() {
   return (
     <div className=" bg-[#657a70] w-full h-screen -z-10">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
-      </Routes>
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }

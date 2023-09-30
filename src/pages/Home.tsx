@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Todo, colors } from "../App";
+import { Todo } from "../App";
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
 import ColorFilter from "../components/ColorFilter";
