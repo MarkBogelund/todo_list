@@ -51,7 +51,11 @@ function EditableCard({
   };
 
   return (
-    <div className="w-96 h-96 rounded-md bg-[#96BBA2] shadow-lg flex flex-col justify-center">
+    <div
+      className={`w-96 h-96 rounded-md shadow-lg flex flex-col justify-center ${
+        completed ? "bg-[#3c6f69]" : "bg-[#96BBA2]"
+      }`}
+    >
       <EditableTitle
         defaultTitle={todo.title}
         onSave={(text) => handleTitleChange(text)}

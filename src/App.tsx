@@ -131,18 +131,6 @@ function App() {
     });
   };
 
-  // Use useEffect to log updated state values
-  // useEffect(() => {
-  //   console.log(
-  //     "Red filter:",
-  //     redFilter,
-  //     "Yellow filter:",
-  //     yellowFilter,
-  //     "Blue filter:",
-  //     blueFilter
-  //   );
-  // }, [redFilter, yellowFilter, blueFilter]);
-
   const deleteTodo = (id: string) => {
     setTodos((currentTodos: Todo[]) => {
       return currentTodos.filter((todo: Todo) => todo.id !== id);
