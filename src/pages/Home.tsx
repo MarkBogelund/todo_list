@@ -3,33 +3,17 @@ import { Todo } from "../App";
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
 import ColorFilter from "../components/ColorFilter";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { firestore } from "../firebase";
 import {
   addTodoToDatabase,
   updatePropertyInDatabase,
   deleteTodoFromDatabase,
 } from "../firebase-utils";
+import { UserAuth } from "../context/AuthContext";
 
 function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
-
-  // Fetch todos from Firestore and render on initial load
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      query(collection(firestore, "todos")),
-      (snapshot) => {
-        const fetchedTodos: Todo[] = [];
-        snapshot.forEach((doc) => {
-          fetchedTodos.push(doc.data() as Todo);
-        });
-        setTodos(fetchedTodos);
-      }
-    );
-
-    // Cleanup listener on component unmount
-    return () => unsubscribe();
-  }, []);
 
   // States for filtering todos by color
   const [redFilter, setRedFilter] = useState<Todo[]>([]);
@@ -79,6 +63,26 @@ function Home() {
     });
   };
 
+  const { user } = UserAuth();
+
+  if (user) {
+    // Fetch todos from Firestore and render on initial load
+    useEffect(() => {
+      const q = query(collection(firestore, user.uid), orderBy("createdAt"));
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const fetchedTodos: Todo[] = [];
+        snapshot.forEach((doc) => {
+          fetchedTodos.push(doc.data() as Todo);
+        });
+        setTodos(fetchedTodos);
+      });
+
+      // Cleanup listener on component unmount
+      return () => unsubscribe();
+    }, []);
+  }
+
   // Add a new todo to Firestore and local state
   const addTodo = (item: string) => {
     const newTodo: Todo = {
@@ -90,7 +94,7 @@ function Home() {
     };
 
     // Add to Firestore
-    addTodoToDatabase(newTodo);
+    addTodoToDatabase(newTodo, user);
 
     // Update local state
     setTodos((currentTodos: Todo[]) => {
@@ -110,7 +114,7 @@ function Home() {
       });
     });
 
-    updatePropertyInDatabase(id, "completed", completed);
+    updatePropertyInDatabase(id, "completed", completed, user);
   };
 
   // Update the 'color' state in Firestore and local state
@@ -124,7 +128,7 @@ function Home() {
       });
     });
 
-    updatePropertyInDatabase(id, "color", color);
+    updatePropertyInDatabase(id, "color", color, user);
 
     addToFilter(id, color);
   };
@@ -140,7 +144,7 @@ function Home() {
       });
     });
 
-    updatePropertyInDatabase(id, "subtext", newSubtext);
+    updatePropertyInDatabase(id, "subtext", newSubtext, user);
   };
 
   // Update the 'title' state in Firestore and local state
@@ -154,7 +158,7 @@ function Home() {
       });
     });
 
-    updatePropertyInDatabase(id, "title", newTitle);
+    updatePropertyInDatabase(id, "title", newTitle, user);
   };
 
   // Delete a todo from Firestore and local state
@@ -163,7 +167,7 @@ function Home() {
       return currentTodos.filter((todo: Todo) => todo.id !== id);
     });
 
-    deleteTodoFromDatabase(id);
+    deleteTodoFromDatabase(id, user);
   };
 
   return (
