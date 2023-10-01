@@ -4,21 +4,12 @@ import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
 import ColorFilter from "../components/ColorFilter";
 import {
-  collection,
-  query,
-  onSnapshot,
-  orderBy,
-  where,
-} from "firebase/firestore";
-import { firestore } from "../firebase";
-import {
   addTodoToDatabase,
   updatePropertyInDatabase,
   deleteTodoFromDatabase,
   fetchTodosFromDatabase,
 } from "../firebase-utils";
 import { UserAuth } from "../context/AuthContext";
-import { get } from "firebase/database";
 
 function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
