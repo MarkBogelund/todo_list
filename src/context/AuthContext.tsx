@@ -22,6 +22,7 @@ interface AuthContextProps {
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   user: User | null;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -34,6 +35,7 @@ interface AuthProviderProps {
 // AuthProvider component
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true); // initialize with true
 
   const register = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -43,6 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       console.log(authUser);
       setUser(authUser);
+      setLoading(false); // set loading to false once we get a response
     });
 
     return () => unsubscribe();
@@ -66,6 +69,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     logout,
     resetPassword,
     user,
+    loading, // added loading to the provided value
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
