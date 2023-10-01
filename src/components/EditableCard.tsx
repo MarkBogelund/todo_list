@@ -3,6 +3,8 @@ import ColorFilter from "./ColorFilter";
 import EditableTitle from "./EditableTitle";
 import { Todo } from "../App";
 import Checkbox from "./Checkbox";
+import { UserAuth } from "../context/AuthContext";
+import { set } from "firebase/database";
 
 function EditableCard({
   todo,
