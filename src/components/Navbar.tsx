@@ -21,6 +21,11 @@ function Navbar() {
     }
   };
 
+  // set openMenu to false when redirecting to another page
+  useEffect(() => {
+    setOpenMenu(false);
+  }, [window.location.pathname]);
+
   useEffect(() => {
     function handleDocumentClick(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -36,52 +41,57 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="absolute top-6 left-6 z-50 flex flex-col" ref={menuRef}>
-      <button
-        className={`bg-[${colors.cardNotDone}] rounded-full text-white text-sm font-thin w-12 aspect-square`}
-        onClick={() => setOpenMenu(!openMenu)}
-      >
-        <Menu />
-      </button>
-      {openMenu ? (
-        <div
-          className={`rounded-md my-2 bg-[${colors.cardNotDone}] flex-1 p-2`}
+    <>
+      <div className="absolute top-6 left-6 z-50 flex flex-col" ref={menuRef}>
+        <button
+          className={`bg-[${colors.cardNotDone}] rounded-full text-white text-sm font-thin w-12 aspect-square`}
+          onClick={() => setOpenMenu(!openMenu)}
         >
-          {user ? (
-            <ul className="flex flex-col justify-evenly items-start w-full h-full mx-4 gap-2">
-              <li className={`text-white text-sm font-thin rounded-md`}>
-                <PersonOutlineIcon className="mr-2" />
-                {user.email}
-              </li>
-              <Link to="/login">
-                <li
-                  className={`text-white text-sm font-thin rounded-md`}
-                  onClick={handleLogout}
-                >
-                  <LogoutIcon className="mr-2" />
-                  Log out
-                </li>
-              </Link>
-            </ul>
-          ) : (
-            <ul className="flex flex-col justify-evenly items-start w-full h-full mx-4">
-              <Link to="/login">
+          <Menu />
+        </button>
+        {openMenu ? (
+          <div
+            className={`rounded-md my-2 bg-[${colors.cardNotDone}] flex-1 p-2`}
+          >
+            {user ? (
+              <ul className="flex flex-col justify-evenly items-start w-full h-full mx-4 gap-2">
                 <li className={`text-white text-sm font-thin rounded-md`}>
-                  <Login className="mr-2" />
-                  Log in
+                  <PersonOutlineIcon className="mr-2" />
+                  {user.email}
                 </li>
-              </Link>
-              <Link to="/signup">
-                <li className={`text-white text-sm font-thin rounded-md`}>
-                  <CreateIcon className="mr-2" />
-                  Sign up
-                </li>
-              </Link>
-            </ul>
-          )}
-        </div>
-      ) : null}
-    </div>
+                <Link to="/login">
+                  <li
+                    className={`text-white text-sm font-thin rounded-md`}
+                    onClick={handleLogout}
+                  >
+                    <LogoutIcon className="mr-2" />
+                    Log out
+                  </li>
+                </Link>
+              </ul>
+            ) : (
+              <ul className="flex flex-col justify-evenly items-start w-full h-full mx-4">
+                <Link to="/login">
+                  <li className={`text-white text-sm font-thin rounded-md`}>
+                    <Login className="mr-2" />
+                    Log in
+                  </li>
+                </Link>
+                <Link to="/signup">
+                  <li className={`text-white text-sm font-thin rounded-md`}>
+                    <CreateIcon className="mr-2" />
+                    Sign up
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
+        ) : null}
+      </div>
+      {openMenu && (
+        <div className="fixed top-0 left-0 bg-black w-full h-screen z-30 opacity-40 bg-blend-overlay"></div>
+      )}
+    </>
   );
 }
 

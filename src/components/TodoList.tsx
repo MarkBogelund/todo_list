@@ -95,8 +95,8 @@ export default function TodoList({
 
   return (
     <>
-      <div className="relative w-[60%] xl:w-[50%] h-[65%] bg-[#486150] rounded-md p-3">
-        <ul className="w-[100%] h-full grid grid-cols-2 auto-rows-min overflow-y-auto justify-items-start gap-6 scrollbar-none sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="relative w-[85%] sm:w-[70%] lg:w-[50%] h-[65%] bg-[#486150] rounded-md p-3">
+        <ul className="w-[100%] h-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 xl:grid-cols-5 auto-rows-min overflow-y-auto justify-items-start gap-6 scrollbar-none">
           {handleFiltering(filter)}
         </ul>
       </div>
