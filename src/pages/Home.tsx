@@ -172,7 +172,7 @@ function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col fixed w-full h-full">
+    <div className="flex justify-center items-center flex-col fixed w-full h-full sm:translate-y-0 translate-y-8">
       <h2 className="text-white text-4xl mb-6 font-light">Your todo.</h2>
       <TodoForm addTodo={addTodo} />
       <ColorFilter

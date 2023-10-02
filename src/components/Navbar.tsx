@@ -55,13 +55,15 @@ function Navbar() {
           >
             {user ? (
               <ul className="flex flex-col justify-evenly items-start w-full h-full mx-4 gap-2">
-                <li className={`text-white text-sm font-thin rounded-md`}>
+                <li
+                  className={`text-white text-lg sm:text-sm font-thin rounded-md`}
+                >
                   <PersonOutlineIcon className="mr-2" />
                   {user.email}
                 </li>
                 <Link to="/login">
                   <li
-                    className={`text-white text-sm font-thin rounded-md`}
+                    className={`text-white text-lg sm:text-sm font-thin rounded-md`}
                     onClick={handleLogout}
                   >
                     <LogoutIcon className="mr-2" />
@@ -72,13 +74,17 @@ function Navbar() {
             ) : (
               <ul className="flex flex-col justify-evenly items-start w-full h-full mx-4">
                 <Link to="/login">
-                  <li className={`text-white text-sm font-thin rounded-md`}>
+                  <li
+                    className={`text-white text-lg sm:text-sm font-thin rounded-md`}
+                  >
                     <Login className="mr-2" />
                     Log in
                   </li>
                 </Link>
                 <Link to="/signup">
-                  <li className={`text-white text-sm font-thin rounded-md`}>
+                  <li
+                    className={`text-white text-lg sm:text-sm font-thin rounded-md`}
+                  >
                     <CreateIcon className="mr-2" />
                     Sign up
                   </li>

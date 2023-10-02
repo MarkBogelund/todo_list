@@ -9,19 +9,19 @@ function ColorFilter({
     <div className={`${className} flex gap-4`}>
       <button
         onClick={() => handleColorClick("red")}
-        className="w-4 h-4 rounded-[100%] bg-[#E63A3A]"
+        className="sm:w-4 w-6 aspect-square rounded-[100%] bg-[#E63A3A]"
       ></button>
       <button
         onClick={() => handleColorClick("yellow")}
-        className="w-4 h-4 rounded-[100%] bg-[#EFDE82]"
+        className="sm:w-4 w-6 aspect-square rounded-[100%] bg-[#EFDE82]"
       ></button>
       <button
         onClick={() => handleColorClick("blue")}
-        className="w-4 h-4 rounded-[100%] bg-[#75C9F8]"
+        className="sm:w-4 w-6 aspect-square rounded-[100%] bg-[#75C9F8]"
       ></button>
       <button
         onClick={() => handleColorClick("all")}
-        className="w-4 h-4 rounded-[100%] border-2 border-white"
+        className="sm:w-4 w-6 aspect-square rounded-[100%] border-2 border-white"
       ></button>
     </div>
   );

@@ -40,7 +40,7 @@ function Login() {
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div
-        className={`w-[70%] sm:w-[45%] lg:w-[30%] h-[60%] bg-[${colors.listBackground}] rounded-md flex flex-col justify-center items-center`}
+        className={`w-[85%] sm:w-[55%] lg:w-[30%] h-[60%] bg-[${colors.listBackground}] rounded-md flex flex-col justify-center items-center`}
       >
         <h1 className="text-white text-3xl font-thin mt-[-10%]">Log in</h1>
         <form

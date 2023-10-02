@@ -52,13 +52,14 @@ function ListItem({
         invisible opacity-0 group-hover:visible group-hover:opacity-100 group-hover:bg-opacity-50 transition-opacity ease-in duration-100"
       >
         <Checkbox
+          className="hidden sm:block"
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
           id={id}
           completed={completed}
         />
       </div>
-      <h2 className="text-white text-center w-full p-2">{title}</h2>
+      <h2 className="text-white text-center w-full p-2 text-base">{title}</h2>
       <div
         className={`w-3 h-3 rounded-[100%] absolute bottom-1 left-1 
         ${provideColor()}`}
