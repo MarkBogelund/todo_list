@@ -97,8 +97,11 @@ function Home() {
   };
 
   // Update the 'completed' state in Firestore and local state
-  const toggleTodo = (id: string, completed: boolean) => {
-    // Update local state first
+  const toggleTodo = (
+    id: string,
+    completed: boolean,
+    callback?: (updatedProp: any) => void
+  ) => {
     setTodos((currentTodos: Todo[]) => {
       return currentTodos.map((todo: Todo) => {
         if (todo.id === id) {
@@ -107,6 +110,10 @@ function Home() {
         return todo;
       });
     });
+
+    if (callback) {
+      callback(completed);
+    }
 
     updatePropertyInDatabase(id, "completed", completed, user);
   };

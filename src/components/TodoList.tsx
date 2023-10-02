@@ -45,6 +45,14 @@ export default function TodoList({
     deleteTodo?.(card.id);
   };
 
+  const onToggleComplete = (id: string, completed: boolean) => {
+    if (openCard == true && id === card.id) {
+      setCard((currentTodo: Todo) => {
+        return { ...currentTodo, completed };
+      });
+    }
+  };
+
   const handleFiltering = (color: string) => {
     let filteredTodos;
     switch (color) {
@@ -80,6 +88,7 @@ export default function TodoList({
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
         showEditableCard={(id) => handleOpenCard(id)}
+        onToggleComplete={onToggleComplete}
       />
     ));
   };

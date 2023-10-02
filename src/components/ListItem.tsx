@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Checkbox from "./Checkbox";
 
 export interface ListItemProps {
@@ -8,6 +9,7 @@ export interface ListItemProps {
   toggleTodo: (id: string, completed: boolean) => void;
   deleteTodo: (id: string) => void;
   showEditableCard: (id: string) => void;
+  onToggleComplete: (id: string, completed: boolean) => void;
 }
 
 function ListItem({
@@ -18,6 +20,7 @@ function ListItem({
   toggleTodo,
   deleteTodo,
   showEditableCard,
+  onToggleComplete,
 }: ListItemProps) {
   const provideColor = () => {
     switch (color) {
@@ -31,6 +34,11 @@ function ListItem({
         return "hidden";
     }
   };
+
+  // Call function everytime the 'completed' prop changes
+  useEffect(() => {
+    onToggleComplete(id, completed);
+  }, [completed]);
 
   return (
     <li

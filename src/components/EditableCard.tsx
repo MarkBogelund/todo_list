@@ -3,8 +3,6 @@ import ColorFilter from "./ColorFilter";
 import EditableTitle from "./EditableTitle";
 import { Todo } from "../App";
 import Checkbox from "./Checkbox";
-import { UserAuth } from "../context/AuthContext";
-import { set } from "firebase/database";
 
 function EditableCard({
   todo,
@@ -25,10 +23,10 @@ function EditableCard({
 
   useEffect(() => {
     setCompleted(todo.completed);
+    console.log("todo.completed new", todo.completed);
   }, [todo.completed]);
 
   const handleCompleted = (id: string, completedStatus: boolean) => {
-    setCompleted(completedStatus);
     toggleTodo?.(id, completedStatus);
   };
 
