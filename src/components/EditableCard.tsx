@@ -63,7 +63,7 @@ function EditableCard({
         titleStyle="text-2xl"
         textType="title"
       />
-      <div className="w-[80%] h-[1px] bg-white self-center mt-3"></div>
+      <div className="w-[80%] h-[1px] bg-white self-center"></div>
       <EditableTitle
         defaultTitle={todo.subtext}
         onSave={(text) => handleSubTextChange(text)}
