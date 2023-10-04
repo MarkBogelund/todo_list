@@ -101,7 +101,7 @@ export default function TodoList({
         </ul>
       </div>
       <div
-        className={`absolute flex justify-center items-center w-full h-screen bg-black ${
+        className={`absolute flex justify-center items-center w-full h-[120%] bg-black ${
           openCard
             ? "visible bg-opacity-40 transition-opacity ease-in duration-100"
             : "invisible opacity-0"

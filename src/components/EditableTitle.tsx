@@ -74,7 +74,7 @@ const EditableTitle: React.FC<EditableTitleProps> = ({
       ) : (
         <textarea
           ref={inputRef as React.RefObject<HTMLTextAreaElement>}
-          className={`${titleStyle} w-full h-full border-white border rounded-md px-2 py-1 outline-none text-gray-900 font-thin resize-none overflow-hidden bg-transparent box-border`}
+          className={`${titleStyle} w-full h-full border-white border rounded-md px-2 py-1 outline-none text-white font-thin resize-none overflow-hidden bg-transparent box-border`}
           placeholder={`${textType}...`}
           value={title}
           onChange={handleInputChange}
