@@ -32,7 +32,7 @@ function EditableCard({
 
   const handleDelete = () => {
     deleteTodo?.(todo.id);
-    console.log("delete");
+    console.log("delete", todo);
   };
 
   const handleColorChange = (color: string) => {

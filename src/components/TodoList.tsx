@@ -80,13 +80,21 @@ export default function TodoList({
       );
     }
 
+    const handleDeleteTodo = (id: string) => {
+      deleteTodo?.(id);
+
+      if (openCard == true && id === card.id) {
+        setOpenCard(false);
+      }
+    };
+
     // Map over the filteredTodos and return JSX elements
     return filteredTodos.map((todo: Todo) => (
       <ListItem
         key={todo.id}
         {...todo}
         toggleTodo={toggleTodo}
-        deleteTodo={deleteTodo}
+        deleteTodo={handleDeleteTodo}
         showEditableCard={(id) => handleOpenCard(id)}
         onToggleComplete={onToggleComplete}
       />

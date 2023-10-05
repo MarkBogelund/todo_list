@@ -95,7 +95,7 @@ function Navbar() {
         ) : null}
       </div>
       {openMenu && (
-        <div className="fixed top-0 left-0 bg-black w-full h-screen z-30 opacity-40 bg-blend-overlay"></div>
+        <div className="fixed top-0 left-0 bg-black w-full h-screen z-30 opacity-40 md:hidden"></div>
       )}
     </>
   );
