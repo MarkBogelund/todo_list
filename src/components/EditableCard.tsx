@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import ColorFilter from "./ColorFilter";
-import EditableTitle from "./EditableTitle";
 import { Todo } from "../App";
 import Checkbox from "./Checkbox";
 
@@ -56,20 +55,27 @@ function EditableCard({
         completed ? "bg-[#3c6f69]" : "bg-[#7daa8b]"
       }`}
     >
-      <EditableTitle
-        defaultTitle={todo.title}
-        onSave={(text) => handleTitleChange(text)}
-        positionStyle="w-[80%] h-[12%] ml-[10%] mt-[20%] mb-4"
-        titleStyle="text-2xl"
-        textType="title"
-      />
+      <textarea
+        className="w-[80%] h-[12%] ml-[10%] mt-[20%] mb-4 text-white text-2xl font-thin border-transparent 
+  focus:border-white focus:outline-none focus:ring-1 focus:ring-white 
+  bg-transparent p-2 pt-1 rounded-md scrollbar-none placeholder-white placeholder-opacity-70 resize-none"
+        placeholder="Add a title..."
+        onChange={(e) => handleTitleChange(e.target.value)}
+        value={todo.title}
+        maxLength={28}
+      ></textarea>
+
       <div className="w-[80%] h-[1px] bg-white self-center"></div>
-      <EditableTitle
-        defaultTitle={todo.subtext}
-        onSave={(text) => handleSubTextChange(text)}
-        positionStyle="w-[80%] h-[50%] ml-[10%] mt-4"
-        textType="subtext"
-      />
+      <textarea
+        className="w-[80%] h-[50%] ml-[10%] mt-4 text-white font-thin border-transparent 
+      focus:border-white focus:outline-none focus:ring-1 focus:ring-white 
+      bg-transparent p-2 rounded-md scrollbar-none placeholder-white placeholder-opacity-70 resize-none"
+        placeholder="Add a description..."
+        onChange={(e) => handleSubTextChange(e.target.value)}
+        maxLength={300}
+        value={todo.subtext}
+      ></textarea>
+
       <div className="w-full flex justify-between mt-auto mb-4">
         <Checkbox
           toggleTodo={handleCompleted}

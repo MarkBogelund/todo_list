@@ -59,7 +59,7 @@ function ListItem({
           completed={completed}
         />
       </div>
-      <h2 className="text-white text-center w-full p-2 text-base">{title}</h2>
+      <p className="text-white text-center break-all p-4">{title}</p>
       <div
         className={`w-3 h-3 rounded-[100%] absolute bottom-1 left-1 
         ${provideColor()}`}
